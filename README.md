@@ -2,7 +2,9 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.4.
 
-# Valorant API
+# ValorantAPI
+
+Website: https://valorant-tactic-game-gd.netlify.app/
 
 My API: https://valorant-tactic-game.azurewebsites.net/swagger
 
