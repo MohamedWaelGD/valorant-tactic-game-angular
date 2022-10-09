@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    background-color: rgb(25, 25, 25) !important;
+}
+
+.item-shop {
+    transition: transform .1s;
+}
+
+.iteam-shop-details {
+    transition: opacity .2s;
+}
+
+.item-shop:hover {
+    transform: scale(1.05);
+}
+
+.item-shop:hover > .iteam-shop-details {
+    opacity: 1 !important;
+}
+
+.modal-dialog {
+    max-width: 80% !important;
+}

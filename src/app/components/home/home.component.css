@@ -1,0 +1,11 @@
+#map {
+    height: calc(100vh - 70px);
+    width: 100%;
+}
+
+.marker-label {
+    color: white;
+    font-weight: bold;
+    margin-bottom: 90px;
+    font-size: 5rem;
+}

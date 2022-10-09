@@ -1,0 +1,76 @@
+<div>
+    <div id="map"></div>
+
+    <ng-template ngModel #content class="modal fade">
+        <div class="modal-body rounded-2 text-white m-0 w-100 bg-dark d-flex flex-column position-relative"
+            [ngStyle]="{'background-image': 'url(' + selectedMission.splash + ')'}"
+            style="min-height: 85vh; background-position: center; background-size: cover;">
+            <div class="position-absolute top-0 bottom-0 rounded-2"
+                style="background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,.8)); left: 0; right: 0; z-index: 0;">
+            </div>
+            <div style="z-index: 1;">
+                <div class="d-flex justify-content-between p-3">
+                    <h1>{{selectedMission.displayName}}</h1>
+                    <button type="button" class="btn-close bg-danger" style="width: 2rem; height: 2rem;"
+                        (click)="closeModal()"></button>
+                </div>
+                <div class="row">
+                    <div class="col-6 p-3">
+                        <div class="w-75 p-2 rounded-2 mb-2" style="background-color: rgba(0,0,0,.4);">
+                            <h3 class="text-center">Map Layout</h3>
+                            <img class="img-fluid" src="{{selectedMission.displayIcon}}" />
+                        </div>
+                        <div class="p-3 mb-3 rounded-2 d-flex justify-content-between align-content-center"
+                            style="background-color: rgba(0,0,0,.4);">
+                            <h3 class="m-0 w-100">Mission cordinates:</h3>
+                            <h5 class="m-0">{{selectedMission.coordinates}}</h5>
+                        </div>
+                        <div class="p-3 mb-3 rounded-2 d-flex justify-content-between align-content-center"
+                            style="background-color: rgba(0,0,0,.4);">
+                            <h3 class="m-0 w-100">Average time:</h3>
+                            <h5 class="m-0 w-100 text-end">{{selectedMission.durationInMin}} Mins</h5>
+                        </div>
+                        <div class="p-3 mb-3 rounded-2 d-flex justify-content-between align-content-center"
+                            style="background-color: rgba(0,0,0,.4);">
+                            <h3 class="m-0 w-100">Reward:</h3>
+                            <h5 class="m-0 w-100 text-end">{{selectedMission.reward}}</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 d-flex justify-content-end align-items-start">
+                        <div *ngIf="tempTeam != null" class="w-75 p-2 rounded-2"
+                            style="background-color: rgba(0,0,0,.4);">
+                            <h1 class="text-center">Team: #{{tempTeam.Name}}</h1>
+                            <div class="row px-2 mx-1">
+                                <div class="col-12 mb-3" style="height: 100px" *ngFor="let agent of tempTeam.Agents">
+                                    <div class="rounded-2 bg-dark h-100">
+                                        <div class="d-flex align-items-center h-100" *ngIf="agent != null">
+                                            <img class="img-fluid h-100" src="{{agent.displayIcon}}" />
+                                            <h2>{{agent.displayName}}</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-100 p-4 text-center">
+                                <button type="button" class="btn btn-danger" (click)="closeModal()">Cancel Mission</button>
+                            </div>
+                        </div>
+                        <div *ngIf="tempTeam == null" class="w-75 p-2 rounded-2"
+                            style="background-color: rgba(0,0,0,.4);">
+                            <h1 style="color: greenyellow;">Mission is available</h1>
+                            <p>Go to the HQ and select one of your team to finish this mission.</p>
+                            <button class="btn btn-success" routerLink="headquarter" (click)="closeModal()">Head Quarter</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </ng-template>
+
+
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"
+        defer>
+        </script>
+</div>

@@ -1,0 +1,75 @@
+<div class="py-4">
+    <h1 class="text-center mb-3">Valorant Weapon Skins</h1>
+    <div class="row w-100 m-0">
+        <div class="col-lg-3 col-md-6 p-2" *ngFor="let weapon of weaponSkinList">
+            <div class="position-relative rounded-2 item-shop bg-white" style="height: 200px; background-image: linear-gradient(to bottom, #c4c4c4, #a5a5a5, #878787, #6a6a6a, #4f4f4f);">
+                <img class="img-fluid w-100 h-100 position-absolute top-50 bottom-50 translate-middle-y" style="object-fit: contain;" src="{{weapon.displayIcon}}" *ngIf="weapon.displayIcon"/>
+                <img class="img-fluid w-100 h-100 position-absolute top-50 bottom-50 translate-middle-y"
+                    style="object-fit: contain;" src="{{weapon.chromas[0].displayIcon}}" *ngIf="!weapon.displayIcon"/>
+                    <img class="img-fluid w-100 h-100 position-absolute top-50 bottom-50 translate-middle-y"
+                        style="object-fit: contain;" src="{{weapon.levels[0].displayIcon}}" *ngIf="!weapon.displayIcon && !weapon.chromas[0].displayIcon"/>
+                <div class="position-absolute top-0 bottom-0 w-100 iteam-shop-details rounded-2 p-3 text-center d-flex flex-column justify-content-center align-items-center"
+                    style="background-color: rgba(0, 0, 0, 0.6); opacity: 0;">
+                    <h2>{{weapon.displayName}}</h2>
+                    <button class="btn btn-danger" (click)="openModal(weapon, content)">Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <ng-template #content class="modal fade">
+        <div class="modal-body rounded-2 text-white m-0 w-100 row bg-dark">
+            <div class="col-6 position-relative">
+                <div class="position-absolute w-100 h-100 bottom-0 top-0 w-50">
+                    <img class="img-fluid w-100 h-100 position-absolute top-50 bottom-50 translate-middle-y"
+                        style="object-fit: contain;" src="{{selectedWeapon.displayIcon}}" *ngIf="selectedWeapon.displayIcon"/>
+                    <img class="img-fluid w-100 h-100 position-absolute top-50 bottom-50 translate-middle-y"
+                        style="object-fit: contain;" src="{{selectedWeapon.chromas[0].displayIcon}}" *ngIf="!selectedWeapon.displayIcon"/>
+                        <img class="img-fluid w-100 h-100 position-absolute top-50 bottom-50 translate-middle-y"
+                            style="object-fit: contain;" src="{{selectedWeapon.levels[0].displayIcon}}" *ngIf="!selectedWeapon.displayIcon && !selectedWeapon.chromas[0].displayIcon"/>
+                </div>
+            </div>
+            <div class="col-6 d-flex flex-column justify-content-between rounded-2 p-2"
+                style="background-color: rgba(0, 0, 0, 0.5);">
+                <div class="d-flex justify-content-between">
+                    <h1 class="text-center mx-3 fst-italic" style="font-size: 4.3rem">{{selectedWeapon.displayName}}</h1>
+                    <button type="button" class="btn-close bg-danger" style="width: 2rem; height: 2rem;"
+                        (click)="closeModal()"></button>
+                </div>
+                <div class="px-3">
+                    <div class="rounded-2 m-2" [ngStyle]="{
+                        'background-image: ': selectedWeapon.wallpaper != null ? selectedWeapon.wallpaper : '',
+                        'background-color': 'rgba(0, 0, 0, 0.4)}'}">
+                        <div class="rounded-2 p-3 m-2" style="background-color: rgba(0, 0, 0, 0.4);">
+                            <h2 class="text-center">Chromas</h2>
+                            <div *ngFor="let chroma of selectedWeapon.chromas; let i in index" class="p-2 mb-1 rounded-2" style="background-color: rgba(255, 255, 255, .1);">
+                                <!-- <div *ngIf="i > 1"> -->
+                                    <h4 class="mb-2 text-center">{{chroma.displayName}}</h4>
+                                    <img class="img-fluid w-100" style="object-fit: contain; height: 100px;" src="{{chroma.fullRender}}"/>
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                        <div class="rounded-2 p-3 m-2" style="background-color: rgba(0, 0, 0, 0.4);">
+                            <h2 class="text-center">Levels</h2>
+                            <div *ngFor="let level of selectedWeapon.levels; let i in index" class="p-2 mb-1 rounded-2" style="background-color: rgba(255, 255, 255, .1);">
+                                <!-- <div *ngIf="i > 1"> -->
+                                    <h4 class="mb-2 text-center">{{level.displayName}}</h4>
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-3">
+                    <div class="rounded-2 p-3 m-2 d-flex justify-content-between align-items-center" style="background-color: rgba(0, 0, 0, 0.4);">
+                        <h2 class="text-center">Price</h2>
+                        <h4 class="m-0">{{selectedWeapon.price}}</h4>
+                    </div>
+                </div>
+                <div class="d-flex flex-column w-100">
+                    <button type="button" class="btn btn-primary my-2" (click)="closeModal()">Buy Agent</button>
+                    <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>
